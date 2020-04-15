@@ -12,7 +12,20 @@ namespace Northwind_AdoDotNet
             string connection = "server=./; Trusted_Connection=yes;database=Northwind";
 
             // sql query
-            string query = "Select ProductID, ProductName from Products Where UnitsInStock < 10";
+            string query = "SELECT e.FirstName, e.LastName FROM Employees e " +
+                "join EmployeeTerritories et on e.EmployeeID = et.EmployeeID " +
+                "join Territories t on et.TerritoryID = t.TerritoryID " +
+                "join Region r on t.RegionID = r.RegionID WHERE r.RegionID = 1";
+
+            string query2 = "select e.FirstName, e.LastName " +
+ "from Employees e " +
+ "join EmployeeTerritories et on " +
+ "e.EmployeeID = et.EmployeeID " +
+ "join Territories t on et.TerritoryID = " +
+ "t.TerritoryID " +
+ "join Region r on t.RegionID = " +
+ "r.RegionID " +
+ "where r.RegionID = 1";
 
             // create Data Adapter to connect with application and database
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(query, connection);
@@ -27,7 +40,7 @@ namespace Northwind_AdoDotNet
             foreach(DataRow dataRow in myDataTable.Rows)
             {
                 Console.WriteLine("Product ID: {0} and Name: {1}",
-                    dataRow["ProductID"], dataRow["ProductName"]);
+                    dataRow["FirstName"], dataRow["LastName"]);
             }
 
         }
