@@ -8,28 +8,26 @@ namespace Northwind_AdoDotNet
     {
         static void Main(string[] args)
         {
-            // create the data connection
-            string connectionString = "server=./; Trusted_Connection=yes;database=Northwind";
+            // connection string
+            string connection = "server=./; Trusted_Connection=yes;database=Northwind";
 
-            // create the string to hold the SQL command
-            // to get records from the Customers table
-            string commandString = "Select CompanyName, ContactName from Customers";
+            // sql query
+            string query = "Select OrderDate, ShippedDate from Orders";
 
-            // create the data adapter with the connection string and command
-            SqlDataAdapter myDataAdapter = new SqlDataAdapter(commandString, connectionString);
+            // create Data Adapter to connect with application and database
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(query, connection);
 
-            // Create and fill the DataSet object
+            // Data Set is used as subset of retrieved data can be used to view or manipulate data
             DataSet myDataSet = new DataSet();
             myDataAdapter.Fill(myDataSet);
 
-            // Retrieve the Customers table
+            // Retrieve the orders table
             DataTable myDataTable = myDataSet.Tables[0];
 
-            // iterate over the rows collection and output the fields
             foreach(DataRow dataRow in myDataTable.Rows)
             {
-                Console.WriteLine("CompanyName: {0}. Contact: {1}",
-                    dataRow["CompanyName"], dataRow["ContactName"]);
+                Console.WriteLine("Orders date: {0} and shipped date: {1}",
+                    dataRow["OrderDate"], dataRow["ShippedDate"]);
             }
 
         }
