@@ -12,7 +12,7 @@ namespace Northwind_AdoDotNet
             string connection = "server=./; Trusted_Connection=yes;database=Northwind";
 
             // sql query
-            string query = "Select OrderDate, ShippedDate from Orders";
+            string query = "Select ProductID, ProductName from Products Where UnitsInStock < 10";
 
             // create Data Adapter to connect with application and database
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(query, connection);
@@ -26,8 +26,8 @@ namespace Northwind_AdoDotNet
 
             foreach(DataRow dataRow in myDataTable.Rows)
             {
-                Console.WriteLine("Orders date: {0} and shipped date: {1}",
-                    dataRow["OrderDate"], dataRow["ShippedDate"]);
+                Console.WriteLine("Product ID: {0} and Name: {1}",
+                    dataRow["ProductID"], dataRow["ProductName"]);
             }
 
         }
